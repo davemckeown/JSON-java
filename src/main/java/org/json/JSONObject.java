@@ -1,6 +1,6 @@
 package org.json;
 
-import java.io.Closeable;
+import java.io.*;
 
 /*
  Copyright (c) 2002 JSON.org
@@ -26,9 +26,6 @@ import java.io.Closeable;
  SOFTWARE.
  */
 
-import java.io.IOException;
-import java.io.StringWriter;
-import java.io.Writer;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -100,7 +97,7 @@ import java.util.regex.Pattern;
  * @author JSON.org
  * @version 2016-08-15
  */
-public class JSONObject {
+public class JSONObject implements Serializable {
     /**
      * JSONObject.NULL is equivalent to the value that JavaScript calls null,
      * whilst Java's null is equivalent to the value that JavaScript calls
@@ -151,7 +148,15 @@ public class JSONObject {
             return "null";
         }
     }
-    
+
+    /**
+     * Serialization version ID. This should only be changed under certain
+     * circumstances, see <a href="https://docs.oracle.com/javase/8/docs/
+     * platform/serialization/spec/version.html#6678">JDK documentation details</a>
+     */
+    private static final long serialVersionUID = 5240016072008648204L;
+
+
     /**
      *  Regular Expression Pattern that matches JSON Numbers. This is primarily used for
      *  output to guarantee that we are always writing valid JSON. 

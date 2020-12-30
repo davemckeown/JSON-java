@@ -25,6 +25,7 @@ package org.json;
  */
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.lang.reflect.Array;
@@ -81,7 +82,14 @@ import java.util.Map;
  * @author JSON.org
  * @version 2016-08/15
  */
-public class JSONArray implements Iterable<Object> {
+public class JSONArray implements Iterable<Object>, Serializable {
+
+    /**
+     * Serialization version ID. This should only be changed under certain
+     * circumstances, see <a href="https://docs.oracle.com/javase/8/docs/
+     * platform/serialization/spec/version.html#6678">JDK documentation details</a>
+     */
+    private static final long serialVersionUID = -3758785237786450861L;
 
     /**
      * The arrayList where the JSONArray's properties are kept.
